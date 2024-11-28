@@ -15,28 +15,38 @@
       </div>
       <PopoverGroup class="hidden lg:flex lg:gap-x-12">
         <Popover class="relative">
-          <PopoverButton class="flex items-center gap-x-1 text-sm/6 font-semibold text-[#E0D8DE] hover:text-[#949D6A]">
+          <PopoverButton class="flex items-center gap-x-1 text-sm/6 font-semibold text-[#E0D8DE] hover:text-[#949D6A]"
+          >
             Dashboard
             <ChevronDownIcon class="size-5 flex-none text-gray-400" aria-hidden="true" />
           </PopoverButton>
 
-          <transition enter-active-class="transition ease-out duration-200" enter-from-class="opacity-0 translate-y-1" enter-to-class="opacity-100 translate-y-0" leave-active-class="transition ease-in duration-150" leave-from-class="opacity-100 translate-y-0" leave-to-class="opacity-0 translate-y-1">
-            <PopoverPanel class="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-[#1a1a1a] shadow-lg ring-1 ring-gray-900/5">
-              <div class="p-4">
-                <div v-for="item in products" :key="item.name" class="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm/6 hover:bg-[#423E37]">
-                  <div class="flex size-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
-                    <component :is="item.icon" class="size-6 text-gray-600 group-hover:text-indigo-600" aria-hidden="true" />
-                  </div>
-                  <div class="flex-auto">
-                    <router-link 
-                      v-if="item.href" 
-                      :to="item.href" 
-                      class="block font-semibold text-[#949D6A]">
-                      {{ item.name }}
-                    </router-link>
-                    <p class="mt-1 text-[#E0D8DE]">{{ item.description }}</p>
-                  </div>
+          <transition
+            @after-leave="isOpen = false"
+            enter-active-class="transition ease-out duration-200" 
+            enter-from-class="opacity-0 translate-y-1" 
+            enter-to-class="opacity-100 translate-y-0" 
+            leave-active-class="transition ease-in duration-150" 
+            leave-from-class="opacity-100 translate-y-0" 
+            leave-to-class="opacity-0 translate-y-1"
+            >
+          <PopoverPanel class="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-[#1a1a1a] shadow-lg ring-1 ring-gray-900/5">
+            <div class="p-4">
+              <div v-for="item in products" :key="item.name" class="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm/6 hover:bg-[#423E37]">
+                <div class="flex size-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
+                  <component :is="item.icon" class="size-6 text-gray-600 group-hover:text-indigo-600" aria-hidden="true" />
                 </div>
+                <div class="flex-auto">
+                  <router-link 
+                    v-if="item.href" 
+                    :to="item.href" 
+                    class="block font-semibold text-[#949D6A]"               
+                    >
+                    {{ item.name }}
+                  </router-link>
+                  <p class="mt-1 text-[#E0D8DE]">{{ item.description }}</p>
+                </div>
+               </div>
               </div>
               <div class="grid grid-cols-2 divide-x divide-gray-900/5 bg-gray-50">
                 <a v-for="item in callsToAction" :key="item.name" :href="item.href" class="flex items-center justify-center gap-x-2.5 p-3 text-sm/6 font-semibold text-gray-900 hover:bg-gray-100">
@@ -53,11 +63,11 @@
         <a href="#" class="text-[#E0D8DE] hover:text-[#949D6A] font-semibold">Company</a>
       </PopoverGroup>
       <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-        <a href="#" class="text-sm/6 font-semibold text-[#E0D8DE]">Log in <span aria-hidden="true">&rarr;</span></a>
+        <RouterLink to="/login" class="text-sm/6 font-semibold text-[#E0D8DE]">Log in <span aria-hidden="true">&rarr;</span></RouterLink>
       </div>
     </nav>
     <Dialog class="lg:hidden" @close="mobileMenuOpen = false" :open="mobileMenuOpen">
-      <div class="fixed inset-0 z-10" />
+      <div class="fixed inset-0 z-10"/>
       <DialogPanel class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
         <div class="flex items-center justify-between">
           <a href="#" class="-m-1.5 p-1.5">
@@ -84,7 +94,7 @@
               
             </div>
             <div class="py-6">
-              <a href="#" class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-[#E0D8DE] hover:bg-gray-50">Log in</a>
+              <RouterLink to="/login" class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-[#E0D8DE] hover:bg-gray-50">Log in</RouterLink>
             </div>
           </div>
         </div>
@@ -128,6 +138,8 @@ const callsToAction = [
   { name: 'Try It Free', href: '#', icon: PlayCircleIcon },
   { name: 'Kontakt', href: '#', icon: PhoneIcon },
 ]
+
+const isOpen = ref(false);
 
 const mobileMenuOpen = ref(false)
 </script>

@@ -40,6 +40,11 @@ function addOption() {
   }
 }
 
+function deleteOption(option) {
+  availableOptions.value.splice(option, 1)
+  selectedOption.value = ""
+}
+
 function closeDropdown(event) {
   if (
     !boxContainer.value.contains(event.target) &&
@@ -60,9 +65,9 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="main">
+  <div class="my-10">
     <div class="space-y-3">
-      <h1 class="text-3xl font-bold tracking-tight text-[#E0D8DE]">
+      <h1 class="text-3xl font-bold tracking-tight flex items-center justify-center mb-10 text-[#E0D8DE]">
         Passwort Generieren
       </h1>
       <div>
@@ -73,7 +78,7 @@ onUnmounted(() => {
           <span
             class="py-3 px-4 inline-flex items-center min-w-fit w-full border border-gray-200 bg-gray-50 text-sm text-gray-500 -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:w-auto sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg dark:bg-[#423E37] dark:border-neutral-700 dark:text-[#E0D8DE]"
           >
-            Name des Passworts
+            
           </span>
           <input
             type="text"
@@ -86,14 +91,14 @@ onUnmounted(() => {
     </div>
 
     <h2 class="my-5 inline-flex items-center w-full">
-      Art bzw. Konto hinzufügen
+      Dienst hinzufügen
     </h2>
 
     <div ref="boxContainer" class="relative w-full" aria-haspopup="listbox">
 
       <button
         @click="showList = !showList"
-        class="relative w-full rounded-lg border justify-center border-slate-300 bg-white px-3 py-2 focus:border-0 focus:outline-none focus:ring-2 focus:ring-orange-500 dark:border-slate-600 dark:bg-slate-900"
+        class="relative w-full rounded-lg border justify-center border-slate-300 bg-white px-3 py-2 focus:border-0 focus:outline-none focus:ring-2 focus:ring-[#949D6A] dark:border-slate-600 dark:bg-[#4A4A4A]"
         aria-expanded="showList"
         aria-controls="option-dropdown"
         aria-labelledby="dropdown-label"
@@ -115,7 +120,7 @@ onUnmounted(() => {
 
       <div
         v-show="showList"
-        class="absolute z-10 mt-1 w-full overflow-hidden rounded-lg border border-slate-300 bg-white shadow-md dark:border-slate-600 dark:bg-slate-900"
+        class="absolute z-10 mt-1 w-full overflow-hidden rounded-lg border border-slate-300 bg-white shadow-md dark:border-slate-600 dark:bg-[#423E37]"
         id="genre-dropdown"
         role="listbox"
         aria-labelledby="dropdown-label"
@@ -127,7 +132,7 @@ onUnmounted(() => {
           ref="searchInput"
           @keydown.enter.prevent="addOption"
           placeholder="Search Option"
-          class="w-full rounded-t-lg border-b bg-white px-3 py-2 focus:border-orange-400 focus:outline-none dark:border-slate-600 dark:bg-slate-900"
+          class="w-full rounded-t-lg border-b bg-white px-3 py-2 focus:border-[#949D6A] focus:outline-none dark:border-slate-600 dark:bg-[#4A4A4A]"
           role="searchbox"
         />
         <div class="combo-box-scrollbar max-h-40 overflow-y-auto">
@@ -135,16 +140,16 @@ onUnmounted(() => {
             v-for="option in filteredOptions"
             :key="option"
             @click="selectOption(option)"
-            class="cursor-pointer px-3 py-2 hover:bg-orange-500 hover:text-white focus:outline-none focus:ring-2 focus:ring-orange-500"
+            class="flex items-center cursor-pointer px-3 py-2 hover:bg-[#949D6A] hover:text-white focus:outline-none focus:ring-2 focus:ring-orange-500"
             role="option"
             :aria-selected="selectedOption === option"
             tabindex="0"
             @keypress.enter="selectOption(option)"
           >
-            {{ option }}
+            <span>{{ option }}</span>
             <button
               @click.stop="deleteOption(option)"
-              class=" mx-11 justify-between text-red-500 hover:text-red-700"
+              class="ml-auto text-red-500 hover:text-red-700"
               aria-label="Option löschen"
             >
             <FolderIcon class="w-5 h-5" />
@@ -152,6 +157,14 @@ onUnmounted(() => {
           </div>
         </div>
       </div>
+    </div>
+
+    <div
+      class="flex items-center justify-center my-10">
+          <button
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
+              Generieren
+          </button>
     </div>
   </div>
 </template>
