@@ -129,13 +129,13 @@ import {
 import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/vue/20/solid'
 
 const products = [
-  { name: 'Passwort Verwaltung', description: 'Get a better understanding of your traffic', href: '#', icon: LockOpenIcon },
-  { name: 'Passwort Generieren', description: 'Speak directly to your customers', href: '/pwgenerate', icon: CursorArrowRaysIcon },
-  { name: 'Sicherheitsbewertung', description: 'Your customers’ data will be safe and secure', href: '#', icon: FingerPrintIcon },
-  { name: 'Einstellungen', description: 'Connect with third-party tools', href: '#', icon: CogIcon },
+  { name: 'Passwort Verwaltung', description: 'Verwalte deine erstellten Passwörter', href: '/pwmanager', icon: LockOpenIcon },
+  { name: 'Passwort Generieren', description: 'Generiere ein neues Passwort', href: '/pwgenerate', icon: CursorArrowRaysIcon },
+  { name: 'Sicherheitsbewertung', description: 'Prüfe wie Sicher deine Passwörter sind', href: '#', icon: FingerPrintIcon },
+  { name: 'Einstellungen', description: 'Passe dein Overlay an', href: '#', icon: CogIcon },
 ]
 const callsToAction = [
-  { name: 'Try It Free', href: '#', icon: PlayCircleIcon },
+  { name: 'Versuch es', href: '#', icon: PlayCircleIcon },
   { name: 'Kontakt', href: '#', icon: PhoneIcon },
 ]
 

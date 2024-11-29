@@ -1,7 +1,6 @@
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue';
-import { ChevronDownIcon, FolderIcon } from '@heroicons/vue/24/outline';
-
+import { ref, computed, onMounted, onUnmounted } from "vue";
+import { ChevronDownIcon, FolderIcon } from "@heroicons/vue/24/outline";
 
 //PasswordInput
 const passwordName = ref("");
@@ -26,7 +25,7 @@ function selectOption(option) {
 
 const filteredOptions = computed(() => {
   return availableOptions.value.filter((option) =>
-    option.toLowerCase().startsWith(searchTerm.value.toLowerCase()),
+    option.toLowerCase().startsWith(searchTerm.value.toLowerCase())
   );
 });
 
@@ -41,8 +40,8 @@ function addOption() {
 }
 
 function deleteOption(option) {
-  availableOptions.value.splice(option, 1)
-  selectedOption.value = ""
+  availableOptions.value.splice(option, 1);
+  selectedOption.value = "";
 }
 
 function closeDropdown(event) {
@@ -67,18 +66,17 @@ onUnmounted(() => {
 <template>
   <div class="my-10">
     <div class="space-y-3">
-      <h1 class="text-3xl font-bold tracking-tight flex items-center justify-center mb-10 text-[#E0D8DE]">
+      <h1
+        class="text-3xl font-bold tracking-tight flex items-center justify-center mb-10 text-[#E0D8DE]"
+      >
         Passwort Generieren
       </h1>
       <div>
-        <div
-          class="sm:flex rounded-lg shadow-sm"
-          id="textbox"
-        >
+        <div class="sm:flex rounded-lg shadow-sm" id="textbox">
           <span
             class="py-3 px-4 inline-flex items-center min-w-fit w-full border border-gray-200 bg-gray-50 text-sm text-gray-500 -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:w-auto sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg dark:bg-[#423E37] dark:border-neutral-700 dark:text-[#E0D8DE]"
           >
-            
+          Name des Passworts
           </span>
           <input
             type="text"
@@ -90,12 +88,9 @@ onUnmounted(() => {
       </div>
     </div>
 
-    <h2 class="my-5 inline-flex items-center w-full">
-      Dienst hinzufügen
-    </h2>
+    <h2 class="my-5 inline-flex items-center w-full">Dienst hinzufügen</h2>
 
     <div ref="boxContainer" class="relative w-full" aria-haspopup="listbox">
-
       <button
         @click="showList = !showList"
         class="relative w-full rounded-lg border justify-center border-slate-300 bg-white px-3 py-2 focus:border-0 focus:outline-none focus:ring-2 focus:ring-[#949D6A] dark:border-slate-600 dark:bg-[#4A4A4A]"
@@ -116,7 +111,6 @@ onUnmounted(() => {
           />
         </span>
       </button>
-
 
       <div
         v-show="showList"
@@ -152,25 +146,25 @@ onUnmounted(() => {
               class="ml-auto text-red-500 hover:text-red-700"
               aria-label="Option löschen"
             >
-            <FolderIcon class="w-5 h-5" />
+              <FolderIcon class="w-5 h-5" />
             </button>
           </div>
         </div>
       </div>
     </div>
 
-    <div
-      class="flex items-center justify-center my-10">
-          <button
-            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-              Generieren
-          </button>
+    <div class="flex items-center justify-center my-10">
+      <button
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+      >
+        Generieren
+      </button>
     </div>
   </div>
 </template>
 
 <style scoped>
-#textbox{
+#textbox {
   margin-top: 20px;
 }
 </style>

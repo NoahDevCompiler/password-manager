@@ -1,8 +1,10 @@
 <script setup>
+import { ClipboardDocumentCheckIcon } from '@heroicons/vue/24/outline';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import {register} from '@/api/requests.js'
 
-const email = ref("");
+const username = ref("");
 const password = ref("");
 const password2 = ref("");
 const router = useRouter();
@@ -11,14 +13,15 @@ const checkPassword = () => {
   return password.value === password2.value;
 };
 
+
 async function registerUser() {
   try {
-    console.log("huiasdfiuhafiasdfiuhd", password.value);
-    await login(email.value, password.value);
+    console.log("huiasdfiuhafiasdfiuhd", username.value);
+    await register(username.value);
     await router.push('/pwmanager');
   } catch (exception) {
     console.error('login error', exception);
-    errors.value = exception.errors;
+    
   }
 }
 </script>
@@ -34,7 +37,7 @@ async function registerUser() {
         <img class="w-50 h-8 mr-2" src="@/assets/logo.png" alt="logo">
       </a>
 
-      <div class="w-full bg-white rounded-lg md:mt-0 sm:max-w-md xl:p-0 dark:bg-[#423E37] dark:border-gray-700">
+      <div class="w-full bg-white rounded-lg md:mt-0 sm:max-w-md xl:p-0 dark:bg-[#4A4A4A] dark:border-gray-700">
         <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
           <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
             Account Erstellen
@@ -44,9 +47,9 @@ async function registerUser() {
               <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 E-Mail
               </label>
-              <input type="email" name="email" id="email" v-model="email"
+              <input type="username" name="username" id="email" v-model="username"
                 class="bg-gray-50 border border-gray-300 text-[#E0D8DE] text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-[#4A4A4A] dark:placeholder-gray-400"
-                placeholder="name@company.com" required>
+                placeholder="UnknownUser123" required>
             </div>
             <div>
               <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
@@ -82,8 +85,14 @@ async function registerUser() {
               </div>
             </div>
 
-            <button type="submit" :disabled="!checkPassword()"
-              class="w-full text-[#E0D8DE] hover:focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+            <button type="submit" 
+              :disabled="!checkPassword()"
+              :class="{
+                'text-gray-400': !checkPassword(),
+                'text-white' : checkPassword()
+              }"
+              class="hover:animate-none animate-bounce w-full bg-blue-500 hover:bg-blue-70 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+              onsubmit="registerUser()">
               Account erstellen
             </button>
 

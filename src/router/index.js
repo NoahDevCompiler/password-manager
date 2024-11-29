@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
 import PwGenerateView from '@/views/PwGenerateView.vue'
 import LoginView from '@/views/LoginView.vue'
+import ManagerView from '@/views/ManagerView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -18,6 +19,10 @@ const router = createRouter({
     {
       path: '/login',
       component: LoginView,
+    },
+    {
+      path: '/pwmanager',
+      component: ManagerView,
     },
   ],
 })
