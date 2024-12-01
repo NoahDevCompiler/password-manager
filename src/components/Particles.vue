@@ -19,7 +19,7 @@ const particlesLoaded = async (container) => {};
           events: {
             onClick: {
               enable: true,
-              mode: 'push',
+              mode: 'repulse',
             },
             onHover: {
               enable: true,

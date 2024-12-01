@@ -31,7 +31,6 @@ import Particles from './components/Particles.vue'
   max-width: 800px;
   min-height: 100vh;
   z-index: 1;
-  position:relative;
 }
 .navbar {
   z-index: 2;

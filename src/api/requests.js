@@ -1,12 +1,23 @@
 
 const backend = 'https://localhost:7117'
 
-export async function register (username) {
+export async function register (username, password) {
     const response = await request(`/register`, {
         method: 'POST',
-        body: JSON.stringify({username}),
+        body: JSON.stringify({username, password}),
     })
+    if (response.token) {
+        setToken(response.token)
+    }
 
+    return response.token
+}
+
+export async function login(username, password){
+    const response = await request('/login', {
+        method: 'POST',
+        body: JSON.stringify({username, password})
+    })
     if (response.token) {
         setToken(response.token)
     }
