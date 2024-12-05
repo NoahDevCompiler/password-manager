@@ -22,7 +22,7 @@ export async function login(username, password){
         setToken(response.token)
     }
 
-    return response.token
+    return response.token  
 }
 
 async function request (url, options) {
@@ -39,12 +39,16 @@ async function request (url, options) {
 
     if (response.ok) {
         console.log(`${response}`)
+        console.log("OK")
         return response.json()
     } else if (response.status === 422) {
         const data = await response.json()
+        console.log("422")
         throw new ValidationError('validation failed', data.errors)
     } else {
-        throw new Error(`Server error: ${await response.text()}`)
+        const data = await response.json();
+        console.log(data.error)
+        throw new Error(await data.error)
     }
 }
 

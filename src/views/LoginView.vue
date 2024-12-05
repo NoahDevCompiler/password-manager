@@ -18,11 +18,13 @@ async function loginUser() {
     console.log("huiasdfiuhafiasdfiuhd", password.value);
     await login(username.value, password.value);
     await router.push('/pwmanager');
-  } catch (exception) {
+  } catch (exception) { 
+    const errorMessage = exception.message;
+    errors.value = errorMessage;
+    console.error('Unerwarteter Fehler:', exception);
     console.log(errors.password, errors.username)
-    console.error('login error', exception);
-    errors.value =  exception.errors
-  }
+    console.log(errorMessage)
+  } 
 }
 </script>
 
@@ -32,7 +34,7 @@ async function loginUser() {
           <el-alert  title="Falsches Passwort" type="error" show-icon />
       </div>
     <h1 class="text-3xl font-bold tracking-tight flex items-center justify-center mb-10 text-[#E0D8DE]">
-      Registrierung
+      Anmelden
     </h1>
 
     <div class="flex flex-col items-center ">

@@ -1,3 +1,48 @@
+<script setup>
+import { ref } from 'vue'
+import { RouterLink } from 'vue-router'
+import { onMounted } from 'vue';
+import {
+  Dialog,
+  DialogPanel,
+  Disclosure,
+  DisclosureButton,
+  DisclosurePanel,
+  Popover,
+  PopoverButton,
+  PopoverGroup,
+  PopoverPanel,
+} from '@headlessui/vue'
+import {
+  LockOpenIcon,
+  Bars3Icon,
+  ChartPieIcon,
+  CursorArrowRaysIcon,
+  FingerPrintIcon,
+  SquaresPlusIcon,
+  CogIcon,
+} from '@heroicons/vue/24/outline'
+import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/vue/20/solid'
+
+function closePopover() {
+  const popoverElement = document.getElementById('PopoverPanel'); 
+  popoverElement.style.visibility = 'hidden';
+}
+
+const products = [
+  { name: 'Passwort Verwaltung', description: 'Verwalte deine erstellten Passwörter', href: '/pwmanager', icon: LockOpenIcon },
+  { name: 'Passwort Generieren', description: 'Generiere ein neues Passwort', href: '/pwgenerate', icon: CursorArrowRaysIcon },
+  { name: 'Sicherheitsbewertung', description: 'Prüfe wie Sicher deine Passwörter sind', href: '#', icon: FingerPrintIcon },
+  { name: 'Einstellungen', description: 'Passe dein Overlay an', href: '#', icon: CogIcon },
+]
+const callsToAction = [
+  { name: 'Versuch es', href: '#', icon: PlayCircleIcon },
+  { name: 'Kontakt', href: '#', icon: PhoneIcon },
+]
+
+const mobileMenuOpen = ref(false)
+</script>
+
 <template>
   <header class="bg-transparent">
     <nav class="mx-auto flex w-full items-center justify-between p-6 lg:px-8 " aria-label="Global">
@@ -15,14 +60,15 @@
       </div>
       <PopoverGroup class="hidden lg:flex lg:gap-x-12">
         <Popover class="relative">
-          <PopoverButton class="flex items-center gap-x-1 text-sm/6 font-semibold text-[#E0D8DE] hover:text-[#949D6A]"
+          <PopoverButton 
+          class="flex items-center gap-x-1 text-sm/6 font-semibold text-[#E0D8DE] hover:text-[#949D6A]"
+          @close-dashboard="closePopover"
           >
-            Dashboard
+              Dashboard
             <ChevronDownIcon class="size-5 flex-none text-gray-400" aria-hidden="true" />
           </PopoverButton>
 
           <transition
-            @after-leave="isOpen = false"
             enter-active-class="transition ease-out duration-200" 
             enter-from-class="opacity-0 translate-y-1" 
             enter-to-class="opacity-100 translate-y-0" 
@@ -30,7 +76,10 @@
             leave-from-class="opacity-100 translate-y-0" 
             leave-to-class="opacity-0 translate-y-1"
             >
-          <PopoverPanel class="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-[#1a1a1a] shadow-lg ring-1 ring-gray-900/5">
+          <PopoverPanel 
+          class="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-[#1a1a1a] shadow-lg ring-1 ring-gray-900/5"
+          id="PopoverPanel"
+          >
             <div class="p-4">
               <div v-for="item in products" :key="item.name" class="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm/6 hover:bg-[#423E37]">
                 <div class="flex size-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
@@ -40,7 +89,8 @@
                   <router-link 
                     v-if="item.href" 
                     :to="item.href" 
-                    class="block font-semibold text-[#949D6A]"               
+                    class="block font-semibold text-[#949D6A]"   
+                    @click="$emit('close-dashboard')"           
                     >
                     {{ item.name }}
                   </router-link>
@@ -103,43 +153,3 @@
   </header>
 </template>
 
-<script setup>
-import { ref } from 'vue'
-import { RouterLink } from 'vue-router'
-import {
-  Dialog,
-  DialogPanel,
-  Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
-  Popover,
-  PopoverButton,
-  PopoverGroup,
-  PopoverPanel,
-} from '@headlessui/vue'
-import {
-  LockOpenIcon,
-  Bars3Icon,
-  ChartPieIcon,
-  CursorArrowRaysIcon,
-  FingerPrintIcon,
-  SquaresPlusIcon,
-  CogIcon,
-} from '@heroicons/vue/24/outline'
-import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/vue/20/solid'
-
-const products = [
-  { name: 'Passwort Verwaltung', description: 'Verwalte deine erstellten Passwörter', href: '/pwmanager', icon: LockOpenIcon },
-  { name: 'Passwort Generieren', description: 'Generiere ein neues Passwort', href: '/pwgenerate', icon: CursorArrowRaysIcon },
-  { name: 'Sicherheitsbewertung', description: 'Prüfe wie Sicher deine Passwörter sind', href: '#', icon: FingerPrintIcon },
-  { name: 'Einstellungen', description: 'Passe dein Overlay an', href: '#', icon: CogIcon },
-]
-const callsToAction = [
-  { name: 'Versuch es', href: '#', icon: PlayCircleIcon },
-  { name: 'Kontakt', href: '#', icon: PhoneIcon },
-]
-
-const isOpen = ref(false);
-
-const mobileMenuOpen = ref(false)
-</script>
