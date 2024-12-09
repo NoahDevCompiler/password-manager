@@ -4,6 +4,9 @@ import PwGenerateView from '@/views/PwGenerateView.vue'
 import LoginView from '@/views/LoginView.vue'
 import RegisterView from '@/views/RegisterView.vue'
 import ManagerView from '@/views/ManagerView.vue'
+import { useToken } from '@/api/auth.js'
+
+const { token } = useToken();
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -28,6 +31,15 @@ const router = createRouter({
     {
       path: '/pwmanager',
       component: ManagerView,
+      beforeEnter(to, from, next){
+        if(!token.value){
+          next({
+            path: '/login'
+          })
+        } else{
+          next()
+        }
+      }
     },
   ],
 })

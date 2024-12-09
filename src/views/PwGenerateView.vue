@@ -2,14 +2,12 @@
 import { ref, computed, onMounted, onUnmounted } from "vue";
 import { ChevronDownIcon, FolderIcon } from "@heroicons/vue/24/outline";
 
-//PasswordInput
 const passwordName = ref("");
 
 const submitPassword = () => {
   console.log(passwordName.value);
 };
 
-//Combobox
 const availableOptions = ref([]);
 const selectedOption = ref("");
 const searchTerm = ref("");
@@ -53,14 +51,15 @@ function closeDropdown(event) {
     showList.value = false;
   }
 }
+async function CreatePasswordData() {
+
+}
+
 
 onMounted(() => {
   window.addEventListener("click", closeDropdown);
 });
 
-onUnmounted(() => {
-  window.removeEventListener("click", closeDropdown);
-});
 </script>
 
 <template>

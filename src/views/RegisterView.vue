@@ -1,18 +1,46 @@
 <script setup>
 import { ClipboardDocumentCheckIcon } from '@heroicons/vue/24/outline';
-import { ref } from 'vue';
+import { ref, computed} from 'vue';
 import { useRouter } from 'vue-router';
 import {register} from '@/api/requests.js'
+import { ElMessage, ElMessageBox } from 'element-plus'
 
 const username = ref("");
 const password = ref("");
 const password2 = ref("");
 const router = useRouter();
 
+const confirmValidation = async () => {
+  if(isPasswordValid.value){
+    registerUser()
+  } else{
+    ElMessageBox.confirm(
+    'Verwende bitte ein sicheres Passwort ',
+    'Min. 12 Zeichen, Verwende Zahlen, Sonderzeichen und Gross-/Kleinbuchstaben',
+    {
+      confirmButtonText: 'OK',
+      type: 'warning',
+    }
+  )
+    .catch(() => {
+      ElMessage({
+        type: 'info',
+        message: 'Delete canceled',
+      })
+    })
+  } 
+}
+
 const checkPassword = () => {
   return password.value === password2.value;
 };
 
+const isPasswordValid = computed(() => {
+  const passwordValue = password.value;
+  const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{12,}$/;
+  console.log(regex.test(passwordValue))
+  return regex.test(passwordValue)
+});
 
 async function registerUser() {
   try {
@@ -21,7 +49,7 @@ async function registerUser() {
     await router.push('/pwmanager');
   } catch (exception) {
     console.error('login error', exception);
-    
+    ElMessage.error(`${exception}`);
   }
 }
 </script>
@@ -42,7 +70,7 @@ async function registerUser() {
           <h1 class="text-xl font-bold leading-tight tracking-tight flex justify-center items-center text-gray-900 md:text-2xl dark:text-white">
             Account Erstellen
           </h1>
-          <form class="space-y-4 md:space-y-6" @submit.prevent="registerUser">
+          <form class="space-y-4 md:space-y-6" @submit.prevent="confirmValidation">
             <div>
               <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 Benutzername
@@ -51,7 +79,7 @@ async function registerUser() {
                 class="bg-gray-50 border border-gray-300 text-[#E0D8DE] text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-[#4A4A4A] dark:placeholder-gray-400"
                 placeholder="UnknownUser" required>
             </div>
-            <div>
+            <div class="max-w-50">
               <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 Master Passwort
               </label>
@@ -64,9 +92,10 @@ async function registerUser() {
                 Bestätige Passwort
               </label>
               <input type="password" name="confirm-password" id="confirm-password" v-model="password2"
-                placeholder="••••••••"
+                placeholder="••••••••"       
                 class="bg-gray-50 border border-gray-300 text-[#E0D8DE] text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-[#4A4A4A] dark:placeholder-gray-400"
                 required>
+                
             </div>
 
             <button type="submit" 
@@ -76,7 +105,7 @@ async function registerUser() {
                 'text-white' : checkPassword()
               }"
               class="hover:animate-none animate-bounce w-full bg-blue-500 hover:bg-blue-70 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-              onsubmit="registerUser()">
+              onsubmit="confirmValidation()">
               Account erstellen
             </button>
 

@@ -1,7 +1,7 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { RouterLink } from 'vue-router'
-import { onMounted } from 'vue';
+import {useToken} from '@/api/auth.js'
 import {
   Dialog,
   DialogPanel,
@@ -24,9 +24,15 @@ import {
 } from '@heroicons/vue/24/outline'
 import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/vue/20/solid'
 
-function closePopover() {
-  const popoverElement = document.getElementById('PopoverPanel'); 
-  popoverElement.style.visibility = 'hidden';
+const popoverOpen = ref(false)
+const {token, clearToken, username } = useToken()
+
+function closePopover () {
+  console.log("Popover wird geschlossen")
+  popoverOpen.value = false
+}
+function openPopover() {
+  popoverOpen.value = true
 }
 
 const products = [
@@ -62,9 +68,9 @@ const mobileMenuOpen = ref(false)
         <Popover class="relative">
           <PopoverButton 
           class="flex items-center gap-x-1 text-sm/6 font-semibold text-[#E0D8DE] hover:text-[#949D6A]"
-          @close-dashboard="closePopover"
+          @click="openPopover"
           >
-              Dashboard
+            Dashboard
             <ChevronDownIcon class="size-5 flex-none text-gray-400" aria-hidden="true" />
           </PopoverButton>
 
@@ -76,9 +82,9 @@ const mobileMenuOpen = ref(false)
             leave-from-class="opacity-100 translate-y-0" 
             leave-to-class="opacity-0 translate-y-1"
             >
-          <PopoverPanel 
+          <PopoverPanel
+          v-if="popoverOpen" 
           class="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-[#1a1a1a] shadow-lg ring-1 ring-gray-900/5"
-          id="PopoverPanel"
           >
             <div class="p-4">
               <div v-for="item in products" :key="item.name" class="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm/6 hover:bg-[#423E37]">
@@ -89,8 +95,8 @@ const mobileMenuOpen = ref(false)
                   <router-link 
                     v-if="item.href" 
                     :to="item.href" 
-                    class="block font-semibold text-[#949D6A]"   
-                    @click="$emit('close-dashboard')"           
+                    class="block font-semibold text-[#949D6A]"                       
+                    @click="closePopover"          
                     >
                     {{ item.name }}
                   </router-link>
@@ -113,7 +119,14 @@ const mobileMenuOpen = ref(false)
         <a href="#" class="text-[#E0D8DE] hover:text-[#949D6A] font-semibold">Company</a>
       </PopoverGroup>
       <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-        <RouterLink to="/login" class="text-sm/6 font-semibold text-[#E0D8DE]">Log in <span aria-hidden="true">&rarr;</span></RouterLink>
+        <template v-if="token">
+          <p>{{username}}</p>
+        </template>
+        <template v-else>
+          <RouterLink to="/login" class="text-sm/6 font-semibold text-[#E0D8DE] hover:text-[#949D6A]">
+            Log in <span aria-hidden="true">&rarr;</span>
+          </RouterLink>
+        </template>   
       </div>
     </nav>
     <Dialog class="lg:hidden" @close="mobileMenuOpen = false" :open="mobileMenuOpen">

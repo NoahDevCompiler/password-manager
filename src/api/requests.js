@@ -1,15 +1,17 @@
-
+import { useToken } from './auth'
 const backend = 'https://localhost:7117'
+
+const { token, setToken, setUsername } = useToken() 
 
 export async function register (username, password) {
     const response = await request(`/register`, {
         method: 'POST',
         body: JSON.stringify({username, password}),
     })
-    if (response.token) {
+    if(response.token){
         setToken(response.token)
+        setUsername(username)
     }
-
     return response.token
 }
 
@@ -20,9 +22,12 @@ export async function login(username, password){
     })
     if (response.token) {
         setToken(response.token)
+        setUsername(username)
     }
 
     return response.token  
+}
+export async function createpassword(password, option){
 }
 
 async function request (url, options) {
@@ -31,9 +36,9 @@ async function request (url, options) {
         'X-Requested-With': 'XMLHttpRequest',
     }
 
-    //if (token.value) {
-        //headers['Authorization'] = 'Bearer ' + token.value
-    //}
+    if (token.value) {
+        headers['Authorization'] = 'Bearer ' + token.value
+    }
 
     const response = await fetch(backend + url, { headers, ...options })
 
