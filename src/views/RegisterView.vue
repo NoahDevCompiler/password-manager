@@ -4,14 +4,17 @@ import { ref, computed} from 'vue';
 import { useRouter } from 'vue-router';
 import {register} from '@/api/requests.js'
 import { ElMessage, ElMessageBox } from 'element-plus'
+import TFASetup from '@/components/TFASetup.vue'
 
 const username = ref("");
 const password = ref("");
 const password2 = ref("");
 const router = useRouter();
+const tfasetup = ref(false)
 
 const confirmValidation = async () => {
   if(isPasswordValid.value){
+    tfasetup.value = true
     registerUser()
   } else{
     ElMessageBox.confirm(
@@ -55,7 +58,8 @@ async function registerUser() {
 </script>
 
 <template>
-  <div class="master">
+  <div class="master relative">
+
     <h1 class="text-3xl font-bold tracking-tight flex items-center justify-center mb-10 text-[#E0D8DE]">
       Registrierung
     </h1>
@@ -94,8 +98,7 @@ async function registerUser() {
               <input type="password" name="confirm-password" id="confirm-password" v-model="password2"
                 placeholder="••••••••"       
                 class="bg-gray-50 border border-gray-300 text-[#E0D8DE] text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-[#4A4A4A] dark:placeholder-gray-400"
-                required>
-                
+                required>              
             </div>
 
             <button type="submit" 
@@ -115,9 +118,12 @@ async function registerUser() {
                 Login
               </RouterLink>
             </p>
-          </form>
-        </div>
+          </form>         
+        </div>       
       </div>
+    </div>
+    <div v-if="tfasetup" id="TFASetup" class="fixed right-5 top-1/4 w-1/3">
+      <TFASetup/>
     </div>
   </div>
 </template>

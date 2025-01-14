@@ -2,6 +2,7 @@
 import { ClipboardDocumentCheckIcon } from '@heroicons/vue/24/outline';
 import { ref } from 'vue';
 import {login} from '@/api/requests.js'
+import TFASetup from '@/components/TFASetup.vue';
 import { useRouter } from 'vue-router';
 
 

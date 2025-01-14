@@ -1,17 +1,22 @@
 import { useToken } from './auth'
+import {jwtDecode} from 'jwt-decode';
+import { ref } from 'vue';
 const backend = 'https://localhost:7117'
 
 const { token, setToken, setUsername } = useToken() 
+const qrCode = ref('');
 
 export async function register (username, password) {
     const response = await request(`/register`, {
         method: 'POST',
         body: JSON.stringify({username, password}),
     })
-    if(response.token){
+    if(response.token && response.QrCodeUrl){
         setToken(response.token)
         setUsername(username)
+        qrCode.value = response.QrCodeUrl;
     }
+    
     return response.token
 }
 
@@ -21,8 +26,10 @@ export async function login(username, password){
         body: JSON.stringify({username, password})
     })
     if (response.token) {
+        const decoded = jwtDecode(token);
         setToken(response.token)
-        setUsername(username)
+        setUsername(decoded.username)
+        
     }
 
     return response.token  

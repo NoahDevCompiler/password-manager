@@ -1,9 +1,8 @@
 @import './base.css';
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-
 
 #app {
   width: 100%;
@@ -12,7 +11,9 @@
   padding: 2rem;
   font-weight: normal;
 }
-
+.source-code-pro {
+  font-family: 'Source Code Pro', monospace;
+}
 a,
 .green {
   text-decoration: none;
