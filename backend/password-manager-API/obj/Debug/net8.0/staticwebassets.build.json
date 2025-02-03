@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "mi9oP+uB1mfxvt2aalKiXhxmHxfK3a+7rfCiPqbbx7o=",
+  "Source": "password-manager-API",
+  "BasePath": "_content/password-manager-API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

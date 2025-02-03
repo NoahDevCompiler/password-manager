@@ -1,0 +1,50 @@
+[
+  {
+    "ContainingType": "password_manager_API.Controllers.LoginController",
+    "Method": "LoginUser",
+    "RelativePath": "Login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "_user",
+        "Type": "password_manager_API.Models.LoginUserDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "password_manager_API.Controllers.RegisterController",
+    "Method": "Post",
+    "RelativePath": "Register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "_user",
+        "Type": "password_manager_API.Models.RegisterUserDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "password_manager_API.Controllers.TFAController",
+    "Method": "Post",
+    "RelativePath": "TFA",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "_user",
+        "Type": "password_manager_API.Models.LoginUserDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]
