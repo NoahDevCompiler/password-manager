@@ -1,156 +1,78 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from "vue";
-import { ChevronDownIcon, FolderIcon } from "@heroicons/vue/24/outline";
+import Services from "@/components/Tabs/Services.vue";
+import Configuration from "@/components/Tabs/Configuration.vue";
+import EmojiPicker from "@/components/Tabs/EmojiPicker.vue";
 
 const passwordName = ref("");
-
-const submitPassword = () => {
-  console.log(passwordName.value);
-};
+const activeName = ref("first");
 
 const availableOptions = ref([]);
 const selectedOption = ref("");
-const searchTerm = ref("");
-const showList = ref(false);
-const boxContainer = ref(null);
-const searchInput = ref(null);
 
-function selectOption(option) {
-  selectedOption.value = option;
-  searchTerm.value = "";
-  showList.value = false;
-}
+const passwortstate = ref("persists");
 
-const filteredOptions = computed(() => {
-  return availableOptions.value.filter((option) =>
-    option.toLowerCase().startsWith(searchTerm.value.toLowerCase())
-  );
-});
-
-function addOption() {
-  if (
-    searchTerm.value &&
-    !availableOptions.value.includes(searchTerm.value.trim())
-  ) {
-    availableOptions.value.push(searchTerm.value.trim());
-    selectOption(searchTerm.value.trim());
-  }
-}
-
-function deleteOption(option) {
-  availableOptions.value.splice(option, 1);
-  selectedOption.value = "";
-}
-
-function closeDropdown(event) {
-  if (
-    !boxContainer.value.contains(event.target) &&
-    !searchInput.value.contains(event.target)
-  ) {
-    searchTerm.value = "";
-    showList.value = false;
-  }
-}
-async function CreatePasswordData() {
-
-}
-
-
-onMounted(() => {
-  window.addEventListener("click", closeDropdown);
-});
-
+const submitPassword = () => {
+  console.log(passwordName.value);
+  console.log(selectedOption.value);
+  console.log(availableOptions.value);
+};
 </script>
 
 <template>
-  <div class="my-10">
+  <div class="my-10 width-full">
     <div class="space-y-3">
       <h1
         class="text-3xl font-bold tracking-tight flex items-center justify-center mb-10 text-[#E0D8DE]"
       >
         Passwort Generieren
       </h1>
-      <div>   
-        <h2 class=" inline-flex items-center w-full">Passwort</h2>    
-        <div class="sm:flex rounded-lg shadow-sm" id="textbox">      
+      <div>
+        <h2 class="flex justify-center items-center w-full mb-2">Passwort</h2>
+        <div
+          class="flex rounded-lg shadow-sm items-center justify-center"
+          id="textbox"
+        >
           <input
             type="text"
             v-model="passwordName"
             @keydown.enter="submitPassword"
-            class="py-3 px-4 pe-11 block w-full border-gray-200 shadow-sm -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-[#4A4A4A] dark:border-neutral-700 dark:text-[#E0D8DE] dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+            class="py-3 mb-10 block w-96 text-center text-xl border-gray-200 rounded-full dark:bg-[#4A4A4A] dark:text-[#E0D8DE]"
           />
         </div>
       </div>
     </div>
 
-    <h2 class="my-5 inline-flex items-center w-full">Dienst hinzufügen</h2>
-
-    <div ref="boxContainer" class="relative w-full" aria-haspopup="listbox">
-      <button
-        @click="showList = !showList"
-        class="relative w-full rounded-lg border justify-center border-slate-300 bg-white px-3 py-2 focus:border-0 focus:outline-none focus:ring-2 focus:ring-[#949D6A] dark:border-slate-600 dark:bg-[#4A4A4A]"
-        aria-expanded="showList"
-        aria-controls="option-dropdown"
-        aria-labelledby="dropdown-label"
-      >
-        <span id="dropdown-label">{{
-          selectedOption || "Wähle oder Füge eine Option hinzu"
-        }}</span>
-        <span
-          class="absolute right-3 top-1/2 -translate-y-1/2"
-          aria-hidden="true"
-        >
-          <ChevronDownIcon
-            class="size-6 transition-transform duration-500"
-            :class="showList ? 'rotate-180' : 'rotate-0 '"
+    <div>
+      <el-tabs v-model="activeName" class="tabs">
+        <el-tab-pane label="Konfiguration" name="first">
+          <Configuration />
+        </el-tab-pane>
+        <el-tab-pane label="Dienst" name="second">
+          <Services
+            v-model:AvailableOptions="availableOptions"
+            v-model:SelectedOption="selectedOption"
           />
-        </span>
-      </button>
-
-      <div
-        v-show="showList"
-        class="absolute z-10 mt-1 w-full overflow-hidden rounded-lg border border-slate-300 bg-white shadow-md dark:border-slate-600 dark:bg-[#423E37]"
-        id="genre-dropdown"
-        role="listbox"
-        aria-labelledby="dropdown-label"
-        tabindex="-1"
-      >
-        <input
-          type="text"
-          v-model="searchTerm"
-          ref="searchInput"
-          @keydown.enter.prevent="addOption"
-          placeholder="Search Option"
-          class="w-full rounded-t-lg border-b bg-white px-3 py-2 focus:border-[#949D6A] focus:outline-none dark:border-slate-600 dark:bg-[#4A4A4A]"
-          role="searchbox"
-        />
-        <div class="combo-box-scrollbar max-h-40 overflow-y-auto">
-          <div
-            v-for="option in filteredOptions"
-            :key="option"
-            @click="selectOption(option)"
-            class="flex items-center cursor-pointer px-3 py-2 hover:bg-[#949D6A] hover:text-white focus:outline-none focus:ring-2 focus:ring-orange-500"
-            role="option"
-            :aria-selected="selectedOption === option"
-            tabindex="0"
-            @keypress.enter="selectOption(option)"
-          >
-            <span>{{ option }}</span>
-            <button
-              @click.stop="deleteOption(option)"
-              class="ml-auto text-red-500 hover:text-red-700"
-              aria-label="Option löschen"
-            >
-              <FolderIcon class="w-5 h-5" />
-            </button>
-          </div>
-        </div>
-      </div>
+        </el-tab-pane>
+        <el-tab-pane label="Zusätzliche Sicherung" name="third">
+          <p class="break-normal">Wähle Eine Reihenfolge dieser Emotes aus</p>
+          <p class="font-source-code my-4 tracking-tight text-white">
+            (Wenn du nichts auswählt wird sie automatisch weggelassen)
+          </p>
+          <EmojiPicker/>
+        </el-tab-pane>
+      </el-tabs>
     </div>
-
-    <div class="flex items-center justify-center my-10">
+    <div
+      class="flex flex-col overflow-hidden items-center justify-center my-10"
+    >
+      <el-radio-group v-model="passwortstate" class="mb-10">
+        <el-radio value="persists">Passwort Speichern</el-radio>
+        <el-radio value="zerostate">Ohne Speicherung Generieren</el-radio>
+      </el-radio-group>
       <button
         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+        @click="submitPassword"
       >
         Generieren
       </button>
@@ -158,8 +80,16 @@ onMounted(() => {
   </div>
 </template>
 
-<style scoped>
-#textbox {
-  margin-top: 20px;
+<style>
+.el-tab-pane {
+  width: 100%;
+  overflow: visible;
+}
+.el-tabs .el-tabs__item.is-active {
+  font-weight: bold;
+  color: #0084ff;
+}
+.el-tabs .el-tabs__item {
+  color: white;
 }
 </style>

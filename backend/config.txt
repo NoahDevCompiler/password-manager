@@ -1,1 +1,0 @@
-{"PageURL":"localhost","DB_host":"localhost","DB_username":"root","DB_password":"Geheim123*","DB_database":"passwordmanager","SecretKey":"ph9uwaefhauioefhuiahfhuipdvfrgsauihogdvfrybihuhuipbdfygsauihogdvfrybihuhuipbdfy"}

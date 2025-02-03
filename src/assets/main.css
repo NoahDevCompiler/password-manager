@@ -14,6 +14,19 @@
 .source-code-pro {
   font-family: 'Source Code Pro', monospace;
 }
+::-webkit-scrollbar{
+  width: 8px;
+}
+::-webkit-scrollbar-track{
+  background: #423E37
+}
+::-webkit-scrollbar-thumb{
+  background: #949D6A;
+  border-radius: 100vw;
+}
+::-webkit-scrollbar-thumb:hover{
+  
+}
 a,
 .green {
   text-decoration: none;

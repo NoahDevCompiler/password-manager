@@ -1,6 +1,5 @@
 <script>
-import { RouterLink } from 'vue-router';
-
+import { RouterLink } from "vue-router";
 </script>
 
 <template>
@@ -14,8 +13,10 @@ import { RouterLink } from 'vue-router';
         vor der Verwendung auf ihre Sicherheit zu überprüfen.
       </p>
     </div>
-    <RouterLink to="/register"
-      class="bg-blue-500 hover:bg-blue-700 text-8xl text-center font-source-code px-10 py-10 my-auto rounded-full text-white "
+    <RouterLink
+      to="/register"
+      class="bg-blue-500 text-8xl text-center font-source-code px-10 py-10 my-auto rounded-full text-white"
+      id="btnRegister"
     >
       Jetzt Registrieren
     </RouterLink>
