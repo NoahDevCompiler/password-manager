@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "04o0dHHRr/g=",
+  "dgSpecHash": "DwVSqQ7UgxM=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Noah\\source\\repos\\password-manager-API\\password-manager-API.csproj",
+  "projectFilePath": "C:\\Users\\Noah\\Documents\\Web Development\\passwort-manager\\backend\\password-manager-API\\password-manager-API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Noah\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\Noah\\.nuget\\packages\\bouncycastle.cryptography\\2.3.1\\bouncycastle.cryptography.2.3.1.nupkg.sha512",
