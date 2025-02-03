@@ -17,6 +17,15 @@ coverage
 /cypress/videos/
 /cypress/screenshots/
 
+.vs/
+# Backend Build- und temporäre Dateien
+backend/bin/
+backend/obj/
+backend/.vs/
+backend/password-manager-API.csproj.user
+backend/*.suo
+backend/*.user
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
