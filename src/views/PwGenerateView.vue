@@ -31,7 +31,7 @@ const submitPassword = () => {
         <h2 class="flex justify-center items-center w-full mb-2">Passwort</h2>
         <div
           class="flex rounded-lg shadow-sm items-center justify-center"
-          id="textbox"
+          id="textbox"  
         >
           <input
             type="text"

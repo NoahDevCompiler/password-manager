@@ -1,18 +1,28 @@
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { ChevronDownIcon } from "@heroicons/vue/24/outline";
 import EmojiPicker from "vue3-emoji-picker";
 import "vue3-emoji-picker/css";
 
 const emojis = ref(["😀", "😂", "🔥", "❤️"]);
-const sequence = ref([""]);
+const sequence = ref([]);
 const selectedEmoji = ref(null);
-const showPicker = ref(false);
-
+const showPicker = ref(0);
 const selectedColors = ref(Array(emojis.value.length).fill("bg-[#4A4A4A]"));
 
-const selectEmoji = (index) => {
-  addSequence(index);
+const selectEmoji = (emoji, index) => {
+  const existingIndex = sequence.value.findIndex((e) => e.emoji === emoji);
+
+  if (existingIndex === -1) {
+    sequence.value.push({
+      emoji,
+      order: sequence.value.length + 1,
+    });
+  } else {
+    sequence.value.splice(existingIndex, 1);
+  }
+  console.log(sequence.value);
+
   selectedEmoji.value = index;
   selectedColors.value[index] =
     selectedColors.value[index] === "bg-[#4A4A4A]"
@@ -22,24 +32,23 @@ const selectEmoji = (index) => {
 
 const changeEmoji = (index, newEmoji) => {
   emojis.value[index] = newEmoji;
+  showPicker.value = null;
 };
 
-const togglePicker = () => {
-  showPicker.value = !showPicker.value;
+const togglePicker = (index) => {
+  showPicker.value = showPicker.value === index ? null : index;
 };
 
 function addSequence(index) {
   if (!sequence.value.includes(index)) {
     sequence.value.push(index);
     console.log(sequence.value);
-
   } else {
     sequence.value.splice(index);
-    console.log(sequence.value)
+    console.log(sequence.value);
   }
 }
 </script>
-
 
 <template>
   <div class="flex justify-center items-center h-300">
@@ -49,25 +58,26 @@ function addSequence(index) {
         :key="index"
         class="relative w-64 h-64 flex justify-center items-center rounded-lg cursor-pointer hover:scale-105 transition"
         :class="selectedColors[index]"
-        @click="selectEmoji(index)"
+        @click="selectEmoji(emoji, index)"
       >
         <span class="justify-center text-9xl text-white">{{ emoji }}</span>
 
-        <span
-          v-if="selectedEmoji === index"
-          class="absolute top-0 right-0 text-white text-xs font-bold rounded-full px-2"
-        >
-          {{ index + 1 }}
-        </span>
-        <button @click="togglePicker">
+        {{ console.log('Emoji:', emoji, 'Sequence:', sequence.value) }}
+
+        <button @click.stop="togglePicker(index)">
           <ChevronDownIcon
             class="size-6 transition-transform duration-500"
-            :class="showPicker ? 'rotate-180' : 'rotate-0 '"
+            :class="showPicker === index ? 'rotate-180' : 'rotate-0 '"
           />
         </button>
+
+        <EmojiPicker
+          v-if="showPicker === index"
+          @select="(emoji) => changeEmoji(index, emoji.i)"
+          class="absolute"
+        />
       </div>
     </div>
-    <EmojiPicker v-if="showPicker"></EmojiPicker>
   </div>
 </template>
   

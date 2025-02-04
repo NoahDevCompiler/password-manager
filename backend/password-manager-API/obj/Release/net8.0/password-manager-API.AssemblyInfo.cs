@@ -13,7 +13,7 @@ using System.Reflection;
 
 [assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("1f9c0370-1487-4079-b6d4-69b15cc24da9")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("password-manager-API")]
-[assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
+[assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+975e4241ac14255496457920ff4beec51b9e4b06")]
 [assembly: System.Reflection.AssemblyProductAttribute("password-manager-API")]

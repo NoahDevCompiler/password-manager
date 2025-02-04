@@ -1,4 +1,5 @@
 import './assets/main.css'
+import gsap from "gsap";
 import { loadSlim } from "@tsparticles/slim";
 import { createApp } from 'vue'
 import App from './App.vue'
@@ -16,5 +17,5 @@ app.use(Particles, {
   },
 });
 app.use(ElementPlus)
-
+app.use(gsap)
 app.mount('#app');

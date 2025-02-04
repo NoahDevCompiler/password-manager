@@ -3,7 +3,7 @@ import { RouterLink } from "vue-router";
 </script>
 
 <template>
-  <div class="absolute top-10 left-10 w-full h-full flex items-start">
+  <div class="absolute top-10 w-full h-full flex items-start flex-col">
     <div class="mr-10">
       <h1 class="font-source-code text-9xl my-9">Passwort Management-Tool</h1>
       <p class="text-xl">
@@ -15,10 +15,13 @@ import { RouterLink } from "vue-router";
     </div>
     <RouterLink
       to="/register"
-      class="bg-blue-500 text-8xl text-center font-source-code px-10 py-10 my-auto rounded-full text-white"
-      id="btnRegister"
+      class="relative group text-8xl text-center font-source-code px-10 py-10 my-auto rounded-full text-white bg-[#423E37] overflow-clip transition-all duration-300 ease-in-out"
     >
-      Jetzt Registrieren
+      <span class="relative z-10">Jetzt Registrieren</span>
+
+      <div
+        class="absolute inset-0 bg-[#949D6A] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out"
+      ></div>
     </RouterLink>
   </div>
 </template>
