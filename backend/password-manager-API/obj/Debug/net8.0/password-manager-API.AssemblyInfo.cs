@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("password-manager-API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+975e4241ac14255496457920ff4beec51b9e4b06")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+acddd0be3764072c78bfaa9515350457966ac76f")]
 [assembly: System.Reflection.AssemblyProductAttribute("password-manager-API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("password-manager-API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

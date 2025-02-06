@@ -7,7 +7,7 @@ namespace password_manager_API.Models
         [Required] public string Password { get; set; }
         [Required] public string Service { get; set; }
         [Required] public int Length { get; set; }
-        public string EmojiSequence { get; set; }
+        public Array? EmojiSequence { get; set; }
 
     }
 }

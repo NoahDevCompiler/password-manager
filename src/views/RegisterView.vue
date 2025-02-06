@@ -69,8 +69,8 @@ async function registerUser() {
         <img class="w-50 h-8 mr-2" src="@/assets/logo.png" alt="logo">
       </a>
 
-      <div class=" bg-white rounded-lg xl:px-7 dark:bg-[#4A4A4A] dark:border-gray-700">
-        <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+      <div class=" bg-white rounded-lg xl:px-7 dark:bg-[#4A4A4A] dark:border-gray-700 w-96">
+        <div class="p-6 space-y-4 md:space-y-6 sm:p-8 ">
           <h1 class="text-xl font-bold leading-tight tracking-tight flex justify-center items-center text-gray-900 md:text-2xl dark:text-white">
             Account Erstellen
           </h1>

@@ -21,17 +21,25 @@ const selectEmoji = (emoji, index) => {
   } else {
     sequence.value.splice(existingIndex, 1);
   }
+  sequence.value.forEach((e, i) => {
+    e.order = i + 1;
+  });
   console.log(sequence.value);
 
   selectedEmoji.value = index;
   selectedColors.value[index] =
     selectedColors.value[index] === "bg-[#4A4A4A]"
-      ? "bg-[#25d3ff8a]"
+      ? "bg-[#949D6A]"
       : "bg-[#4A4A4A]";
 };
 
 const changeEmoji = (index, newEmoji) => {
+  const oldEmoji = emojis.value[index];
+  console.log("OldEmoji:", oldEmoji);
   emojis.value[index] = newEmoji;
+  if (sequence.value[index]) {
+    sequence.value[index].emoji = newEmoji;
+  }
   showPicker.value = null;
 };
 
@@ -39,15 +47,7 @@ const togglePicker = (index) => {
   showPicker.value = showPicker.value === index ? null : index;
 };
 
-function addSequence(index) {
-  if (!sequence.value.includes(index)) {
-    sequence.value.push(index);
-    console.log(sequence.value);
-  } else {
-    sequence.value.splice(index);
-    console.log(sequence.value);
-  }
-}
+
 </script>
 
 <template>
@@ -62,7 +62,11 @@ function addSequence(index) {
       >
         <span class="justify-center text-9xl text-white">{{ emoji }}</span>
 
-        {{ console.log('Emoji:', emoji, 'Sequence:', sequence.value) }}
+        <span
+          class="absolute top-0 right-0 text-white text-xs font-bold rounded-full px-2"
+        >
+          {{ sequence.find((e) => e.emoji === emoji)?.order }}
+        </span>
 
         <button @click.stop="togglePicker(index)">
           <ChevronDownIcon
@@ -77,6 +81,8 @@ function addSequence(index) {
           class="absolute"
         />
       </div>
+    </div>
+    <div>
     </div>
   </div>
 </template>

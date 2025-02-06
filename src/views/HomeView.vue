@@ -7,10 +7,9 @@ import { RouterLink } from "vue-router";
     <div class="mr-10">
       <h1 class="font-source-code text-9xl my-9">Passwort Management-Tool</h1>
       <p class="text-xl">
-        Das ist Mein Passwort-Manager mit einem sicheren
-        Passwort-Generierungstool. Bitte beachten Sie, dass das Tool nicht
-        regelmäßig gewartet wird. Daher wird empfohlen, generierte Passwörter
-        vor der Verwendung auf ihre Sicherheit zu überprüfen.
+        I always wanted simple passwords that i can remember, but their just not save, so i came up with the idea of a deterministic password-generator.
+        I know its not the most secure solution, so i wouldnt recommend using it to use on account with really critical data. 
+        I'm still working on a concept of save deterministic password generation.
       </p>
     </div>
     <RouterLink

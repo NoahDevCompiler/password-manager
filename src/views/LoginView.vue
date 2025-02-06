@@ -40,15 +40,15 @@ async function loginUser() {
     </h1>
 
     <div class="flex flex-col items-center">
-      <a
-        href="#"
+      <RouterLink
+        to="/"
         class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-[#E0D8DE]"
       >
         <img class="w-50 h-8 mr-2" src="@/assets/logo.png" alt="logo" />
-      </a>
+      </RouterLink>
 
       <div
-        class="bg-white rounded-lg xl:px-5 dark:bg-[#4A4A4A] dark:border-gray-700"
+        class="bg-white rounded-lg xl:px-5 dark:bg-[#4A4A4A] dark:border-gray-700 w-96 h-96 "
       >
         <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
           <h1
@@ -64,12 +64,11 @@ async function loginUser() {
               >
                 Benutzername
               </label>
-              <input
+              <el-input
                 type="username"
                 name="username"
-                id="email"
                 v-model="username"
-                class="bg-gray-50 border border-gray-300 text-[#E0D8DE] text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-[#4A4A4A] dark:placeholder-gray-400"
+                class="text-[#ffffff] "
                 placeholder="UnknownUser"
                 required
               />
@@ -81,14 +80,14 @@ async function loginUser() {
               >
                 Master Passwort
               </label>
-              <input
+              <el-input
                 type="password"
                 name="password"
-                id="password"
                 placeholder="••••••••"
                 v-model="password"
-                class="bg-gray-50 border border-gray-300 text-[#E0D8DE] text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-[#4A4A4A] dark:placeholder-gray-400"
+                class="text-[#E0D8DE]"
                 required
+                show-password
               />
             </div>
             <button
@@ -112,3 +111,17 @@ async function loginUser() {
     </div>
   </div>
 </template>
+
+<style scoped>
+.el-input :deep(.el-input__inner){
+    height: 40px;
+    color: azure;
+}
+
+.el-input :deep(.el-input__wrapper){
+    align-items: center;
+    background-color: transparent;
+
+
+}
+</style>
