@@ -9,10 +9,7 @@ const showList = ref(false);
 const boxContainer = ref(null);
 const searchInput = ref(null);
 
-const emit = defineEmits([
-  "update:AvailableOptions",
-  "update:SelectedOption",
-]);
+const emit = defineEmits(["update:AvailableOptions", "update:SelectedOption"]);
 
 function selectOption(option) {
   selectedOption.value = option;

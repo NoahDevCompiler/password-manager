@@ -46,8 +46,6 @@ const changeEmoji = (index, newEmoji) => {
 const togglePicker = (index) => {
   showPicker.value = showPicker.value === index ? null : index;
 };
-
-
 </script>
 
 <template>
@@ -82,8 +80,7 @@ const togglePicker = (index) => {
         />
       </div>
     </div>
-    <div>
-    </div>
+    <div></div>
   </div>
 </template>
   

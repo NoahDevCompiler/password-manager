@@ -1,6 +1,7 @@
 ﻿using Google.Authenticator;
 using password_manager_API.Models;
 using static Mysqlx.Expect.Open.Types.Condition.Types;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace password_manager_API.Helpers
 {
@@ -31,7 +32,8 @@ namespace password_manager_API.Helpers
         }
 
         public bool Verify2FACode(string secret, string iv, string code) {
-            
+
+       
             string decryptedSecret = EncryptionHelper.DecryptSecret(secret, _aesKey, iv);
             Console.WriteLine(secret);
             Console.WriteLine(decryptedSecret);

@@ -16,9 +16,17 @@ namespace password_manager_API.Controllers
         private readonly TokenConfig? _tokenConfig;
         public GeneratePasswordController(TokenConfig tokenConfig) {
             _tokenConfig = tokenConfig;
-        }   
+        }
+        [HttpPost]
         public IActionResult Post([FromBody] PasswordDTO _password) {
+
             string hashedpassword = GeneratePasswordHelper.GeneratePassword(_password);
+            Console.WriteLine(hashedpassword);
+
+            return Ok(hashedpassword);
+
+
+
         }
     }
 }

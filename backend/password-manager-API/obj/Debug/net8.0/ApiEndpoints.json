@@ -1,5 +1,21 @@
 [
   {
+    "ContainingType": "password_manager_API.Controllers.GeneratePasswordController",
+    "Method": "Post",
+    "RelativePath": "GeneratePassword",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "_password",
+        "Type": "password_manager_API.Models.PasswordDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "password_manager_API.Controllers.LoginController",
     "Method": "LoginUser",
     "RelativePath": "Login",

@@ -1,43 +1,47 @@
 import { useToken } from './auth'
-import {jwtDecode} from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 import { ref } from 'vue';
 const backend = 'https://localhost:7117'
 
-const { token, setToken, setUsername } = useToken() 
+const { token, setToken, setUsername } = useToken()
 const qrCode = ref('');
 
-export async function register (username, password) {
+export async function register(username, password) {
     const response = await request(`/register`, {
         method: 'POST',
-        body: JSON.stringify({username, password}),
+        body: JSON.stringify({ username, password }),
     })
-    if(response.token && response.QrCodeUrl){
+    if (response.token && response.QrCodeUrl) {
         setToken(response.token)
         setUsername(username)
         qrCode.value = response.QrCodeUrl;
     }
-    
+
     return response.token
 }
 
-export async function login(username, password){
+export async function login(username, password) {
     const response = await request('/login', {
         method: 'POST',
-        body: JSON.stringify({username, password})
+        body: JSON.stringify({ username, password })
     })
     if (response.token) {
         const decoded = jwtDecode(token);
         setToken(response.token)
         setUsername(decoded.username)
-        
     }
 
-    return response.token  
-}
-export async function createpassword(password, option){
 }
 
-async function request (url, options) {
+export async function generator(plainpw, service, length, emojisequence) {
+    const response = await request('/genratepassword', {
+        method: 'POST',
+        body: JSON.stringify({ plainpw, service, length, emojisequence })
+    })
+    return response
+}
+
+async function request(url, options) {
     const headers = {
         'Content-Type': 'application/json',
         'X-Requested-With': 'XMLHttpRequest',
@@ -68,7 +72,7 @@ class ValidationError {
     message
     errors
 
-    constructor (message, errors) {
+    constructor(message, errors) {
         this.message = message
         this.errors = errors
     }

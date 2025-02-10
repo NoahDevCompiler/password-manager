@@ -97,7 +97,8 @@ function animateText() {
         <el-tab-pane label="Zusätzliche Sicherung" name="third">
           <p class="break-normal">Wähle Eine Reihenfolge dieser Emotes aus</p>
           <p class="font-source-code my-4 tracking-tight text-white">
-            Bitte merke dir diese Sequenz gut, ohne kannst du dein Passwort nicht wieder sehen ):
+            Bitte merke dir diese Sequenz gut, ohne kannst du dein Passwort
+            nicht wieder sehen ):
           </p>
           <EmojiPicker />
         </el-tab-pane>

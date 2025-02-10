@@ -4,7 +4,7 @@ import { ref } from "vue";
 const value1 = ref(12);
 </script>
 <template>
-  <div class="slider">
+  <div class="slider w-full overflow-visible">
     <span class="passwordlength">Passwort Länge (Empfohlen: 12)</span>
     <el-slider v-model="value1" :min="8" :max="20" />
   </div>
